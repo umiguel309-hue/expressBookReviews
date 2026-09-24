@@ -1,0 +1,8 @@
+curl -X POST http://localhost:5000/register -H "Content-Type: application/json" -d '{"username":"miguel", "password":"1234"}'
+{"message":"Usuario registrado exitosamente"}
+
+curl -c cookies.txt -X POST http://localhost:5000/customer/login -H "Content-Type: application/json" -d '{"username":"miguel", "password":"1234"}'
+{"message":"Usuario logueado exitosamente"}
+
+curl -b cookies.txt -X PUT "http://localhost:5000/customer/auth/review/1?review=Excelente%20libro,%20muy%20recomendado"
+{"message":"Reseña agregada/actualizada exitosamente","reviews":{"miguel":"Excelente libro, muy recomendado"}}

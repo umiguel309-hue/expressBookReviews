@@ -36,9 +36,22 @@ const isValid = (username)=>{ //returns boolean
   });
 
 // Add a book review
-regd_users.put("/auth/review/:isbn", (req, res) => {
-  //Write your code here
-  return res.status(300).json({message: "Yet to be implemented"});
+regd_users.put("/auth/review/:isbn", (req,res) => {
+  const isbn = req.params.isbn;
+  const review = req.query.review;
+  const username = req.session.authorization['username'];
+
+  if (!books[isbn]) {
+    return res.status(404).json({message: "Libro no encontrado"});
+  }
+
+  if (!review) {
+    return res.status(404).json({message: "Se requiere el texto de la reseña"});
+  }
+
+  books[isbn].reviews[username] = review;
+
+  return res.status(200).json({message: "Reseña agregada/actualizada exitosamente", reviews: books[isbn].reviews});
 });
 
 module.exports.authenticated = regd_users;
