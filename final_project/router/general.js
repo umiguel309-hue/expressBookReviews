@@ -135,4 +135,28 @@ public_users.getBooksByAuthorAsync = async function (author) {
   }
 };
 
+// Título - Usando Promesas
+public_users.getBooksByTitlePromise = function (title) {
+  return axios.get(`http://localhost:5000/title/${title}`)
+    .then((response) => {
+      console.log(JSON.stringify(response.data, null, 4));
+      return response.data;
+    })
+    .catch((error) => {
+      console.error("Error al obtener los libros:", error.message);
+    });
+};
+
+// Título - Usando Async/Await
+public_users.getBooksByTitleAsync = async function (title) {
+  try {
+    const response = await axios.get(`http://localhost:5000/title/${title}`);
+    console.log(JSON.stringify(response.data, null, 4));
+    return response.data;
+  } catch (error) {
+    console.error("Error al obtener los libros:", error.message);
+  }
+};
+
+
 module.exports.general = public_users;
