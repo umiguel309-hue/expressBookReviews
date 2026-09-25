@@ -112,4 +112,27 @@ public_users.getBookByISBNAsync = async function (isbn) {
   }
 };
 
+// Autor - Usando Promesas
+public_users.getBooksByAuthorPromise = function (author) {
+  return axios.get(`http://localhost:5000/author/${author}`)
+    .then((response) => {
+      console.log(JSON.stringify(response.data, null, 4));
+      return response.data;
+    })
+    .catch((error) => {
+      console.error("Error al obtener los libros:", error.message);
+    });
+};
+
+// Autor - Usando Async/Await
+public_users.getBooksByAuthorAsync = async function (author) {
+  try {
+    const response = await axios.get(`http://localhost:5000/author/${author}`);
+    console.log(JSON.stringify(response.data, null, 4));
+    return response.data;
+  } catch (error) {
+    console.error("Error al obtener los libros:", error.message);
+  }
+};
+
 module.exports.general = public_users;
