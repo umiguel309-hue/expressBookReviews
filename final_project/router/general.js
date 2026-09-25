@@ -62,4 +62,31 @@ public_users.get('/review/:isbn',function (req, res) {
   res.send(JSON.stringify(books[isbn].reviews, null, 4));
 });
 
+
+const axios = require('axios');
+
+// Usando Promesas (.then / .catch)
+public_users.getAllBooksPromise = function () {
+  return axios.get('http://localhost:5000/')
+    .then((response) => {
+      console.log(JSON.stringify(response.data, null, 4));
+      return response.data;
+    })
+    .catch((error) => {
+      console.error("Error al obtener los libros:", error.message);
+    });
+};
+
+// Usando Async/Await
+public_users.getAllBooksAsync = async function () {
+  try {
+    const response = await axios.get('http://localhost:5000/');
+    console.log(JSON.stringify(response.data, null, 4));
+    return response.data;
+  } catch (error) {
+    console.error("Error al obtener los libros:", error.message);
+  }
+};
+
+
 module.exports.general = public_users;
