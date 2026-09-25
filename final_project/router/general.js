@@ -89,4 +89,27 @@ public_users.getAllBooksAsync = async function () {
 };
 
 
+// ISBN - Usando Promesas
+public_users.getBookByISBNPromise = function (isbn) {
+  return axios.get(`http://localhost:5000/isbn/${isbn}`)
+    .then((response) => {
+      console.log(JSON.stringify(response.data, null, 4));
+      return response.data;
+    })
+    .catch((error) => {
+      console.error("Error al obtener el libro:", error.message);
+    });
+};
+
+// ISBN - Usando Async/Await
+public_users.getBookByISBNAsync = async function (isbn) {
+  try {
+    const response = await axios.get(`http://localhost:5000/isbn/${isbn}`);
+    console.log(JSON.stringify(response.data, null, 4));
+    return response.data;
+  } catch (error) {
+    console.error("Error al obtener el libro:", error.message);
+  }
+};
+
 module.exports.general = public_users;
